@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
+    
+    private String test="Test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
