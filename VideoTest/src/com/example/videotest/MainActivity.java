@@ -12,7 +12,7 @@ import android.view.Menu;
 
 public class MainActivity extends Activity {
     
-    private String test="Test";
+    private String test="TestTwo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
