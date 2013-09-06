@@ -13,24 +13,48 @@ import android.view.Menu;
 public class MainActivity extends Activity {
     
     private String test="TestFour";
+    
+    OoyalaPlayerLayout playerLayout;
+    OoyalaPlayerLayoutController playerLayoutController;
+    OoyalaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        OoyalaPlayerLayout playerLayout = (OoyalaPlayerLayout)findViewById(R.id.ooyalaPlayer);
-        OoyalaPlayerLayoutController playerLayoutController = new OoyalaPlayerLayoutController(playerLayout,
+         playerLayout = (OoyalaPlayerLayout)findViewById(R.id.ooyalaPlayer);
+         playerLayoutController = new OoyalaPlayerLayoutController(playerLayout,
         "l4aWsxOrJsQb5QTA3TSfyfKdI5Qb", "www.ooyala.com");
-        OoyalaPlayer player = playerLayoutController.getPlayer();
-        if (player.setEmbedCode("JzeTM1ZTo1Q0DFzpG5NFLGMjPaQqUC6-")) {
-        // The Embed Code works
-        player.play();
-        } else {
-        Log.d(this.getClass().getName(), "Something Went Wrong!");
-        }
+         if(player==null){
+        	 player = playerLayoutController.getPlayer(); 
+        	  player = playerLayoutController.getPlayer();
+              if (player.setEmbedCode("JzeTM1ZTo1Q0DFzpG5NFLGMjPaQqUC6-")) {
+              // The Embed Code works
+              player.play();
+              
+              } else {
+              Log.d(this.getClass().getName(), "Something Went Wrong!");
+              }
+         }else{
+        	 player.resume();
+         }
+       
     }
-
-
+    
+    @Override
+    protected void onPause(){
+    	 super.onPause();
+    	 player.pause();
+    	 
+    }
+    
+    
+    @Override
+    protected void onStop(){
+    	super.onStop();
+    	player.pause();
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
